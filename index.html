@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Game Generator</title>
+    <style>
+        body {
+            background:url(darkNoise.jpg),#000;
+            width:100%;
+            height:100%;
+            overflow:hidden;
+
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        #credits {
+            position: fixed;
+            width: 100%;
+            height: 20px;
+            margin: 0;
+            bottom: 0;
+            left:0;
+            background: #666;
+        }
+
+        #credits>span {
+            color:#fff;
+            font-family:bold;
+            font-family:monospace;
+        }
+
+        #credits a {
+            color:#fff;
+            font-family:monospace;
+        }
+
+        
+        .container {
+            position:absolute;
+            top:45%;
+            width:100%;
+            font-size:24pt;
+            text-align:center;
+            vertical-align: middle;
+            text-align:center;
+        }
+
+        .idea {
+            color:#ddd;
+            cursor:pointer;
+            position:relative;
+            text-decoration: none;
+            opacity: 1;
+            padding: 0;
+        }
+
+        .idea:hover {
+            color:#fff;
+            text-shadow:0px 0px 3px #fff;
+        }
+
+        .idea.animate {
+            animation: click 0.5s ease-in-out;
+            animation-iteration-count: 1;
+        }
+
+        @keyframes click {
+            0% {
+                transform: scale(1.0);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1.0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="credits">
+        <span><b>Made by <a href="/arthur/index.html">Arthur Lumertz</a></b> | <b>Yes, I know there are little ideas.</b> | 4/19/23 </span>
+    </div>
+    <div class="container">
+        <div onclick="Generate();" id="game" class="idea">Loading..</div>
+    </div>
+
+    <script>
+        function l(what){return document.getElementById(what);}
+
+        var str=[
+            "A clicker game where you have to build an empire.",
+            "An adventure game where you have to collect gold.",
+            "A puzzle game that you make your own puzzles and share them with your friends.",
+            "A real-time strategy game where you make peace with animals.",
+            "A game where you have to hit and poke your friends.",
+            "A game where you're a bunny and have to collect as many carrots as you can in 60 seconds.",
+            "A farming game where you grow and sell your crops.",
+            "A game where you sharpen pencils for a living.",
+            "A game where you're the CEO of a chocolate company.",
+            "A family simulator where you can create and manage families.",
+            "An RPG game where you're the main reason everybody has died.",
+            "A game where you have to create 3D models and sell them online.",
+            "A game where you own a successful restaurant.",
+            "A game where you have to try to survive after you crash into the moon.",
+            "A streamer simulator where you have to build your online following.",
+            "A game where you have to build computers and sell them.",
+            "An adventure game where you're the last one standing.",
+            "A game where you create and manage your own business.",
+            "A game where you become the president of a country.",
+            "A game where you strive to be a top football player.",
+            "A game where you have to survive after the moon explodes, and the sun heats up.",
+            "A game where you play fun games with your friends.",
+            "A game where you run a magical potion shop.",
+            "A game where you're a detective solving mysterious cases.",
+            "A space exploration game where you search for new planets.",
+            "A time travel adventure game to fix historical mistakes.",
+            "A game where you build and manage a wildlife sanctuary.",
+            "A superhero simulator where you save the city from villains.",
+            "A cooking game where you create exotic dishes from around the world.",
+            "A treasure hunt game in a lost city deep in the jungle.",
+            "A game where you're an archaeologist digging up ancient relics.",
+            "A game where you manage a zoo and take care of exotic animals.",
+            "A survival game on a deserted island with limited resources.",
+            "A game where you build and customize your dream car.",
+            "A virtual reality simulation game set in a futuristic city.",
+            "A competitive e-sports game in a virtual arena.",
+            "A game where you're a bee collecting nectar to save your hive.",
+            "A mystery adventure set in an abandoned haunted mansion.",
+            "A world-building game where you create your own universe.",
+            "A futuristic racing game with high-speed hovercars.",
+            "A dance-off game to become the best dancer in the world.",
+            "A game where you run a spa and offer relaxation to customers.",
+            "A game where you run a space station and manage intergalactic trade.",
+            "A game where you design and decorate dream homes for clients.",
+            "An underwater adventure to explore the secrets of the deep ocean.",
+            "A survival game in a post-apocalyptic world overrun by zombies.",
+            "A game where you're a space explorer seeking alien civilizations.",
+            "A game where you time-travel to various historical eras.",
+            "A game where you train and raise mythical creatures.",
+            "A detective game where you solve complex murder mysteries.",
+            "A game where you build and manage a music festival.",
+            "A game where you're a fashion designer creating runway-worthy outfits.",
+            "An educational game that teaches history through interactive storytelling.",
+            "A game where you're a wizard battling dark forces with magic spells.",
+            "A competitive racing game featuring high-speed jet skis.",
+            "A cooking simulation game with a focus on international cuisine.",
+            "A game where you manage a space colony on an alien planet.",
+            "A game where you control a robot to solve environmental puzzles.",
+            "A time management game in a bustling city bakery.",
+            "A game where you're a medieval knight on a quest to rescue a princess.",
+            "A game where you run an art gallery and curate exhibitions.",
+            "An escape room game where you solve puzzles to find your way out.",
+            "A game where you're a deep-sea diver exploring shipwrecks and marine life.",
+            "A game where you manage a wildlife reserve and protect endangered species.",
+            "A game where you explore a mysterious forest and solve magical puzzles.",
+            "A game where you're a pirate searching for buried treasure on a desert island.",
+            "A game where you're a time-traveling historian documenting historical events.",
+            "A virtual pet game where you raise and train magical creatures.",
+            "A time-loop puzzle game where you relive the same day with different choices.",
+            "A game where you control a small country and make political decisions.",
+            "An escape room game set in a haunted mansion with supernatural puzzles.",
+            "A game where you're a secret agent on a mission to stop global threats.",
+            "A competitive surfing game with various challenging waves and tricks.",
+            "A game where you explore an alien planet and document its unique wildlife.",
+            "A game where you're a firefighter responding to emergency calls and saving lives.",
+            "A game where you're a chef preparing gourmet meals for demanding customers.",
+            "A virtual reality escape room experience with mind-bending puzzles.",
+            "A time management game where you run a bustling airport.",
+            "A game where you're a paranormal investigator exploring haunted locations.",
+            "An educational game that teaches science concepts through interactive experiments.",
+            "A game where you're a zookeeper taking care of exotic animals from around the world.",
+            "A game where you're a parkour expert navigating challenging urban environments.",
+            "A game where you run a detective agency solving complex cases.",
+            "A game where you're a professional athlete competing in various sports.",
+            "A game where you build and manage a space colony on Mars.",
+            "A game where you're a submarine captain exploring the depths of the ocean.",
+            "A game where you're a race car driver in a high-stakes championship.",
+            "A game where you're a skilled archer facing off against mythical creatures.",
+            "A game where you're a superhero defending the city from supervillains.",
+            "An educational game that teaches geography and world cultures.",
+            "A game where you're an inventor creating incredible gadgets and machines.",
+            "A game where you're a ghost hunter exploring haunted locations with spectral encounters.",
+            "A game where you're a professional skateboarder performing amazing tricks in skateparks.",
+            "A game where you're a pilot flying aircraft in challenging weather conditions.",
+            "A game where you're a deep-sea diver searching for sunken treasure and shipwrecks.",
+            "A game where you're a wildlife photographer capturing stunning images of animals.",
+            "A game where you're a treasure hunter searching for hidden artifacts in ancient ruins.",
+            "A game where you're a chef competing in culinary competitions around the world.",
+            "A game where you're a time traveler exploring different historical eras.",
+            "A game where you're an archaeologist excavating ancient civilizations and artifacts.",
+            "A game where you're a rock star performing at concerts and managing your band.",
+            "A game where you're a pilot in a futuristic space combat simulation.",
+            "A game where you're a race car mechanic building and customizing high-performance vehicles.",
+            "A game where you're a wildlife biologist studying animal behavior in the wild.",
+            "A game where you're a master thief planning and executing heists.",
+            "A game where you're a veterinarian caring for a variety of animals in your clinic.",
+            "A game where you're a treasure map maker creating mysterious and challenging maps.",
+            "A game where you're a professional diver exploring underwater caves and shipwrecks.",
+            "A game where you're an astronaut on a mission to explore distant planets.",
+            "A game where you're a gemologist searching for precious gems in mines and caves.",
+            "A game where you're a race car designer creating innovative and powerful vehicles.",
+            "A game where you're a fashion model walking the runway at international fashion shows.",
+            "A game where you're a stunt performer performing daring feats in action movies.",
+            "A game where you're a professional wrestler competing in the ring with unique moves.",
+            "A game where you're a theme park designer creating thrilling and imaginative attractions.",
+            "A game where you're a wildlife rehabilitator helping injured animals recover and return to the wild.",
+            "A game where you're a spy infiltrating enemy organizations and uncovering secrets.",
+            "A game where you're a wildlife artist creating detailed illustrations of animals and landscapes.",
+            "A game where you're a robot engineer designing and building robots for various tasks.",
+            "A game where you're a paleontologist excavating and reconstructing dinosaur fossils.",
+            "A game where you're a puppeteer creating and controlling marionette characters in a puppet show.",
+            "A game where you're a graffiti artist creating vibrant street art in urban environments.",
+            "A game where you're a glassblower crafting intricate glass sculptures and designs.",
+            "A game where you're a lighthouse keeper maintaining a historic coastal lighthouse.",
+            "A game where you're a skydiver performing breathtaking aerial maneuvers in the sky.",
+            "A game where you're a wildlife conservationist protecting endangered species and habitats.",
+            "A game where you're a treasure hunter seeking legendary and mythical treasures.",
+            "A game where you're a spy agency director managing secret agents on missions.",
+            "A game where you're a documentary filmmaker capturing compelling stories and experiences.",
+            "A game where you're a pilot in an air race competition flying through challenging courses.",
+            "A game where you're an art restorer preserving and repairing valuable works of art.",
+            "A game where you're a race car test driver evaluating high-speed vehicles on the track.",
+            "A game where you're a park ranger protecting national parks and their ecosystems.",
+            "A game where you're a deep-sea explorer uncovering the mysteries of the ocean's depths.",
+        ];
+
+        Generate=function() {
+            let total = str.length;
+            var random = Math.floor(Math.floor(Math.random() * total - 1) + 1);
+            l("game").innerHTML=str[random];
+
+            l("game").classList.add('animate');
+            setTimeout(() => {
+                l("game").classList.remove('animate');
+            }, 500);
+        }
+        Generate();
+    </script>
+</body>
+</html>
